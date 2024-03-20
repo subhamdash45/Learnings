@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SSE Test App</title>
+</head>
+<body>
+  <h1>In SSE App</h1>
+  <section style="height: 100px; width: 300px; background-color: antiquewhite;">
+  <ul style="list-style-type:disc">
+    <li> Stock1 Price : <span id="first-element"></span></li>
+    <li >Stock2 Price : <span id="second-element"></span></li>
+  </ul>
+  <div id="time"></div>
+
+  </section>
+
+  <script>
+    sessionStorage.setItem("studentDetails", JSON.stringify({name: 'Rahul', expiry: new Date().getTime() + 10 * 1000}))
+    const eventSource = new EventSource('/sse')
+    eventSource.onmessage = (event)=>{
+      const resObject = JSON.parse(event.data)
+      const firstElement = document.getElementById('first-element')
+      firstElement.innerText = `${resObject.stock1Rate}`
+      const secondElement = document.getElementById('second-element')
+      secondElement.innerText = `${resObject.stock2Rate}`
+      const timeElement = document.getElementById('time')
+      timeElement.innerText = `${resObject.currentTime}`
+    }
+    function addValue() {
+      sessionStorage.setItem("newDetails", JSON.stringify({name: 'Subham', expiry: new Date().getTime() + 80 * 1000}))
+    }
+
+  </script>
+  <button onclick="addValue()">Click</button>
+</body>
+</html>
