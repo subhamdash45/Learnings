@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 style="width: 500px;">This is polling topic</h1>
+    <div id="data-container"></div>
+
+    <script>
+      // for short polling
+      async function apiCall() {
+        try {
+          const response = await fetch('getData')
+          const result = await response.json();
+          document.getElementById('data-container').innerText=result.data
+        } catch (e) {
+          console.log(e)
+        }
+      }
+
+      function shortPolling() {
+        setInterval(() => {
+          apiCall()
+        }, 5000);
+        
+      }
+      
+      shortPolling()
+    </script>
+  </body>
+</html>
