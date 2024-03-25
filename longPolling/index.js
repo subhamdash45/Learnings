@@ -21,6 +21,7 @@ app.get("/getData", (req, res) => {
   }
 });
 
+// open new tab and open url - http://localhost:3010/updateData?newData=abc
 app.get("/updateData", (req, res) => {
   data = req.query.newData;
   while(waitingClientList.length>0){
