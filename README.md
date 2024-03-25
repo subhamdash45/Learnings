@@ -2,7 +2,7 @@
 
 ## Installation and Getting started
 
-You can go to the repo, which you want to execute and run the blow commands
+You can navigate to the repository you wish to execute and run the following commands
 
 - npm install
 - npm run start
